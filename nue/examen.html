@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+        <script src="vue.js"></script>
+        <div id="random">
+
+                <button v-on:click ="calcular(randomNumber)">Calcular</button>
+                numero Randimco<input type="text"  v-model="randomNumber"><br>
+                 numeros Radomicos<input type="text" v-model="randomicos"><br>
+                suma <input type="text" v-model="resultadoSuma"><br>
+                primedio <input type="text" v-model="resultadoPromedio"><br>
+                Suma Pares<input type="text" v-model="sumaP"><br>
+                Promedio pares <input type="text" v-model="resultadoPromedioPares"><br>
+                Suma impares<input type="text" v-model="sumaI"><br>
+                Promedio impares <input type="text" v-model="resultadoPromedioImpares"><br>
+
+        </div>
+</body>
+<script>
+
+    var random = new Vue ({
+        el:'#random',
+        data:{
+            randomNumber:'',
+            randomicos:[],
+            resultadoSuma:0,
+            resultadoPromedio:0,
+            sumaP:0,
+            promedioP:0,
+            contadorPares:0,
+            resultadoPromedioPares:0,
+            sumaI:0,
+            contadorImpares:0,
+            resultadoPromedioImpares:0,
+
+
+
+        },
+      methods : {
+        calcular : function(randomNumber){ 
+            let numA;
+            for(let i =0; i<randomNumber; i++){
+                numA=Math.floor(Math.random() * 100)
+                this.randomicos.push(numA);
+                this.calcularSuma(numA); 
+                this.calcularPares(numA);
+                this.calcularImpares(numA);
+                
+                
+
+            }
+            this.calcularPromedio();
+            this.calcularPromedioPares(); 
+            this.calcularPromedioImpares();
+            
+           
+        },
+        calcularSuma: function(numero){
+           
+ this.resultadoSuma+=numero;
+
+        },
+        calcularPromedio: function(){
+            this.resultadoPromedio= this.resultadoSuma/this.randomNumber;
+
+        },
+
+        calcularPares: function(numA){
+
+                if (numA % 2 == 0) {
+                    this.sumaP +=numA;
+                    this.contadorPares ++;
+                }                
+    },
+    calcularPromedioPares: function(){
+    this.resultadoPromedioPares= this.sumaP/this.contadorPares;
+},
+    
+calcularImpares: function(numA){
+
+    if(numA %2 == 1){
+        this.sumaI+= numA;
+        this.contadorImpares ++;
+             }
+    
+},
+
+calcularPromedioImpares: function(){
+    
+    this.resultadoPromedioImpares =this.sumaI/this.contadorImpares;
+}
+
+    }
+})
+    </script>
+</html>

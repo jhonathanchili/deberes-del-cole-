@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+    <title>02 v-for</title>
+</head>
+<body>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Robayo</a></li>
+            <li class="breadcrumb-item"><a href="#">VUE</a></li>
+            <li class="breadcrumb-item active" aria-current="page">02 v-for</li>
+        </ol>
+    </nav>
+    <div class="container" >
+        <div class="row">
+            <div class="col bg-light sidebar">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">                             
+                                v-for 
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#rango">                             
+                                Rango de números 
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#conteo">                             
+                                Conteo regresivo
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#arrays">                             
+                                Arrays con índices
+                            </a>
+                        </li>                        
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#objetos">                             
+                                Objetos
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-10">
+                <h1>v-for</h1>
+                <p>Es la implementación en VUE de un for.  Típicamente se usa para iterar arrays.</p>
+                <p>La directiva <code>v-text</code> permite imprimir el valor de una variable.</p>
+                <p>VUE dispone del método <code>mounted</code> que funciona de manera análoga al método onLoad de JS.</p>
+        
+                <h3>Demostración</h3>
+                <p>Usando <code>{{nombre}}</code> para imprimir la variable.</p>
+                <div class="alert alert-secondary" role="alert" id="app1">
+                        <ul>
+                            <li v-for="nombre in nombres">{{nombre}}</li>
+                        </ul>
+                    </div>
+                <p>Usando <code>v-text="nombre"</code> para imprimir la variable.</p>
+                <div class="alert alert-secondary" role="alert" id="app2">
+                    <ul>
+                        <li v-for="nombre in nombres" v-text="nombre"></li>
+                    </ul>
+                </div>
+                <h2>HTML</h2>
+                <xmp class="prettyprint">
+                    <div class="alert alert-secondary" role="alert" id="app2">
+                        <ul>
+                            <li v-for="nombre in nombres" v-text="nombre"></li>
+                        </ul>
+                    </div>
+                </xmp>
+                <ul>
+                    <li><code>v-for</code> es muy similar en su sintaxis a foreach</li>
+                    <li>Se puede usar indistintamente <code>v-text="msg"</code> o <code>{{msg}}</code></li>
+                </ul>
+                
+                <h2>JS</h2>
+                <pre class="prettyprint" >
+                    var app2 = new Vue({
+                        el: '#app2',
+                
+                        data: {
+                            nombres: ['Ahmad','Víctor','MaPaz']
+                        }
+                
+                    })
+                </pre>
+                <p>
+                    <ul>
+                        <li><code>var app2 = New Vue</code> crea una variable y le asigna una nueva instancia de VUE.</li>              
+                        <li><code>data</code> es el lugar donde se definen las variables</li>
+                        <li><code>nombres:['Ahmad','Victor','MaPaz']</code> es un array</li>
+                        <li>Los datos también van a poder llegar desde el servidor, cuando VUE consuma servicios REST.</li>
+                        <li>Se puede modificar la data con JS standard. </li>
+                    </ul>
+                </p> 
+                <div class="alert alert-success" role="alert">
+                    <a id="rango"></a> <h2>Rango de números</h2>
+                </div>       
+                <p>Se va a imprimir "hola" 4 veces</p>
+                <div id="app3">
+                    <ul>
+                        <li v-for="n in 4">Hola</li>
+                    </ul>
+                </div>
+                <h3>Código</h3>
+                <xmp class="prettyprint">
+                    <div id="app3">
+                            <ul>
+                                <li v-for="n in 4">Hola</li>
+                            </ul>
+                    </div>
+                    <script>                            
+                        var app3 = new Vue({
+                            el: '#app3'
+                        })
+                    </script>
+                </xmp>
+        
+                <div class="alert alert-success" role="alert">
+                    <a id="conteo"></a>  <h2>Conteo regresivo</h2>
+                </div>       
+                <p>Se va a imprimir del 10 al 1. <strong>VUE es 1-indexed</strong>,  eso quiere decir que <strong>n in 10</strong> contará desde 1 a 10, no desde 0 a 10 como típicamente se esperaría que vaya.</p>
+                <p>Luego, <code>{{11-n}}</code> es lo que permite imprimir la cuenta regresiva hasta 1 </p>
+                <div id="app4">
+                    <ul>
+                        <li v-for="n in 10">{{11-n}}</li>
+                        <li>lanzar misil!</li>
+                    </ul>
+                </div>
+                <h3>Código</h3>
+                <xmp class="prettyprint">
+                    <div id="app4">
+                            <ul>
+                                <li v-for="n in 10">{{11-n}}</li>
+                                <li>lanzar misil!</li>
+                            </ul>
+                    </div>
+                    <script>                            
+                        var app4 = new Vue({
+                            el: '#app4'
+                        })
+                    </script>
+                </xmp>
+            
+                <div class="alert alert-success" role="alert">
+                    <a id="arrays"></a> <h2>Arrays con índices</h2>
+                </div>       
+                <p>
+                    <ul>
+                        <li>
+                            Vue permite enumerar arrays.  La sintaxis general es: <code>v-for=(element, index) in array</code>
+                        </li>                    
+                        <li>
+                            Se puede omitir el índice y el paréntesis, si lo que se quiere son los elementos del array.
+                        </li>
+                        <li>
+                            Este tipo de enumeración se muestra tal cual como fue ingresada en el array.  No es lo mismo cuando se enumeran objetos.
+                        </li>
+                    </ul>   
+                </p>
+
+                <p>Cuando enumeramos un array, también tenemos acceso al índice,  representado por la variable <code>index</code> en el siguiente código </p>
+                <div id="app5">
+                    <ul>
+                        <li v-for="(animal, index) in animales">
+                            El {{ animal }} hace {{ sonidos[index] }}
+                        </li>
+                    </ul>
+                </div>
+                <h3>Código</h3>
+                <xmp class="prettyprint">
+                    <div id="app5">
+                        <ul>
+                            <li v-for="(animal, index) in animales">
+                                El {{ animal }} hace {{ sonidos[index] }}
+                            </li>
+                        </ul>
+                    </div>
+                    <script>                            
+                        var app5 = new Vue({
+                            el:'#app5',
+                            data:{
+                                animales: ['perro','gato','ave'],
+                                sonidos: ['guau','miau','pio pio']
+                            }
+                        })
+                    </script>
+                </xmp>
+                
+                <div class="alert alert-success" role="alert">
+                    <a id="objetos"></a><h2>Objetos</h2>
+                </div>
+                <p>
+                    <ul>
+                        <li>
+                            La sintaxis es <code>v-for="(value, property)"</code>
+                        </li>
+                        <li>
+                            En la práctica, la mayoría de browser, se mostrará en el mismo orden de inserción del array, pero esto <strong>no está garantizado</strong>
+                        </li>
+                    </ul>
+                </p>       
+                <p>Se puede iterar un array de objetos</p>
+                <div id="app6">
+                    <ul>
+                        <li v-for="(sonido, nombre) in animals">
+                            El {{nombre}} hace {{sonido}}
+                        </li>
+                    </ul>
+                </div>
+                <h3>Código</h3>
+                <xmp class="prettyprint">
+                    <div id="app6">
+                        <ul>
+                            <li v-for="(sonido, nombre) in animals">
+                                El {{nombre}} hace {{sonido}}
+                            </li>
+                        </ul>
+                    </div>
+                    <script>                            
+                        var app6 = new Vue({
+                            el: '#app6',
+                                data: {
+                                    animals: { 
+                                        perro:'guau', gato:'miau', pajaro:'pio'
+                                    }
+                                }       
+                            })
+                    </script>
+                </xmp>            
+            </div>
+        </div>
+        
+    </div>
+    
+    
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    var app1 = new Vue({
+        el: '#app1',
+
+        data: {
+            nombres: ['Ahmad','Víctor','MaPaz']
+        }
+    })
+    
+    var app2 = new Vue({
+        el: '#app2',
+
+        data: {
+            nombres: ['Ahmad','Víctor','MaPaz']
+        }
+    })
+
+    var app3 = new Vue({
+        el: '#app3'
+    })
+
+    var app4 = new Vue({
+        el: '#app4'
+    })
+
+    var app5 = new Vue({
+        el:'#app5',
+        data:{
+            animales: ['perro','gato','ave'],
+            sonidos: ['guau','miau','pio pio']
+        }
+    })
+
+    var app6 = new Vue({
+        el: '#app6',
+        data: {
+            animals: { 
+                perro:'guau', gato:'miau', pajaro:'pio'
+            }
+        }       
+    })
+
+</script>
+
+</html>
